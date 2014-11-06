@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 import re
 from urlparse import urlparse
 
@@ -5,7 +6,7 @@ from urlparse import urlparse
 def parse_links(env):
     links = {}
 
-    for envkey in env.keys():
+    for envkey in list(env.keys()):
         m = re.match("([A-Z0-9_]+)_PORT_\d+_([A-Z0-9]+)", envkey)
         if m is None:
             continue

@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+from __future__ import print_function
 import unittest
 import docker_links
 import json
@@ -37,7 +39,7 @@ class DockerLinkTests(unittest.TestCase):
             l["db"]["port"], int(TEST_ENV["DB_PORT_6379_TCP_PORT"]))
         self.assertEqual(l["db"]["proto"], TEST_ENV["DB_PORT_6500_TCP_PROTO"])
 
-        print "%s" % json.dumps(l, indent=2, sort_keys=True)
+        print("%s" % json.dumps(l, indent=2, sort_keys=True))
 
 if __name__ == '__main__':
     unittest.main()
