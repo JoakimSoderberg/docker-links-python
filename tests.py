@@ -18,7 +18,11 @@ TEST_ENV = {
 	"DB_REDIS_PORT_6379_TCP": "tcp://172.17.0.2:6379",
 	"DB_REDIS_PORT_6379_TCP_ADDR": "172.17.0.2",
 	"DB_REDIS_PORT_6379_TCP_PORT": "6379",
-	"DB_REDIS_PORT_6379_TCP_PROTO": "tcp"
+	"DB_REDIS_PORT_6379_TCP_PROTO": "tcp",
+	"DB_REDIS_PORT_6379_UDP": "udp://172.17.0.2:6379",
+	"DB_REDIS_PORT_6379_UDP_ADDR": "172.17.0.2",
+	"DB_REDIS_PORT_6379_UDP_PORT": "6379",
+	"DB_REDIS_PORT_6379_UDP_PROTO": "udp"
 };
 
 class DockerLinkTests(unittest.TestCase):
@@ -26,9 +30,11 @@ class DockerLinkTests(unittest.TestCase):
 	def test_parse_links(self):
 		l = docker_links.parse_links(TEST_ENV)
 
-		self.assertEqual(l["db"]["port"], 6379)
+		self.assertEqual(l["db"]["hostname"], TEST_ENV["DB_PORT_6379_TCP_ADDR"])
+		self.assertEqual(l["db"]["port"], int(TEST_ENV["DB_PORT_6379_TCP_PORT"]))
+		self.assertEqual(l["db"]["proto"], TEST_ENV["DB_PORT_6500_TCP_PROTO"])
 		
-		print "%s" % json.dumps(l, indent=4)
+		print "%s" % json.dumps(l, indent=2, sort_keys=True)
 
 if __name__ == '__main__':
     unittest.main()
