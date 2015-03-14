@@ -1,0 +1,11 @@
+language: python
+sudo: false  # enables docker-based Travis builds
+python:
+  - "2.6"
+  - "2.7"
+  - "3.2"
+  - "3.3"
+  - "3.4"
+  - "nightly"
+  - "pypy"
+script: python tests.py
