@@ -1,6 +1,9 @@
 from __future__ import absolute_import
 import re
-from urlparse import urlparse
+try:   # python 2.x
+    from urlparse import urlparse
+except:  # python 3.x
+    from urllib.parse import urlparse
 
 
 def parse_links(env):
